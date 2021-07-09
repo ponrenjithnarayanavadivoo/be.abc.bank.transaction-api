@@ -1,0 +1,204 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "This service is used to manage the accounts of the ABC Bank customer",
+		"version": "1.0.0",
+		"title": "Bank Account Service API"
+	},
+	"host": "be.abc.transaction.service",
+	"basePath": "/transaction/v1",
+	"schemes": [
+		"http"
+	],
+	"paths": {
+		"/create-transaction": {
+			"post": {
+				"tags": [
+					"createTransaction"
+				],
+				"description": "A new account will be created for the provided customer Id",
+				"operationId": "createTransaction",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/Api-Key"
+					},
+					{
+						"$ref": "#/parameters/Request-ID"
+					},
+					{
+						"$ref": "#/parameters/Accept"
+					},
+					{
+						"$ref": "#/parameters/Api-Version"
+					},
+					{
+						"$ref": "#/parameters/Client-TimeStamp"
+					},
+					{
+						"in": "body",
+						"name": "TransactionRequestInfo",
+						"description": "customer information",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/TransactionRequestInfo"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Transaction created successfully"
+					},
+					"405": {
+						"description": "Invalid input"
+					},
+					"500": {
+						"description": "Invalid Server Error"
+					}
+				}
+			}
+		},
+		"/transaction-detail/{accountIds}": {
+			"get": {
+				"tags": [
+					"accountDetail"
+				],
+				"summary": "Find pet by ID",
+				"description": "Get the customer detail",
+				"operationId": "getAccountDetails",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/Api-Key"
+					},
+					{
+						"$ref": "#/parameters/Request-ID"
+					},
+					{
+						"$ref": "#/parameters/Accept"
+					},
+					{
+						"$ref": "#/parameters/Api-Version"
+					},
+					{
+						"$ref": "#/parameters/Client-TimeStamp"
+					},
+					{
+						"name": "accountId",
+						"in": "path",
+						"description": "customer account number",
+						"required": true,
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/TransactionDetailsInfo"
+						}
+					},
+					"404": {
+						"description": "Account Id not found"
+					},
+					"400": {
+						"description": "Invalid customer ID supplied"
+					},
+					"500": {
+						"description": "Invalid Server Error"
+					}
+				}
+			}
+		}
+	},
+	"parameters": {
+		"Api-Key": {
+			"name": "Api-Key",
+			"in": "header",
+			"description": " ???",
+			"type": "string"
+		},
+		"Request-ID": {
+			"name": "Request-ID",
+			"in": "header",
+			"description": "It will be used a sort of correlation id for logging and tracking purposes.",
+			"required": true,
+			"type": "string"
+		},
+		"Accept": {
+			"name": "Accept",
+			"in": "header",
+			"description": "It must be of type appliation/json.",
+			"required": true,
+			"type": "string"
+		},
+		"Api-Version": {
+			"name": "Api-Version",
+			"in": "header",
+			"description": "Version of the API's definition.",
+			"required": true,
+			"type": "string"
+		},
+		"Client-TimeStamp": {
+			"name": "Client-TimeStamp",
+			"in": "header",
+			"description": "TimeStamp in ISO8601 Format is ???.",
+			"required": true,
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"definitions": {
+		"TransactionDetailsInfo": {
+			"properties": {
+				"TransactionDetails": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/TransactionDetail"
+					},
+					"minItems": 0
+				}
+			}
+		},
+		"TransactionDetail": {
+			"properties": {
+				"transactionId": {
+					"type": "string"
+				},
+				"amount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"transactionTimestamp": {
+					"type": "string"
+				},
+				"accountNumber": {
+					"type": "string"
+				}
+			}
+		},
+		"TransactionRequestInfo": {
+			"properties": {
+				"amount": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"accountNumber": {
+					"type": "integer",
+					"format": "int64"
+				}
+			}
+		}
+	}
+}
