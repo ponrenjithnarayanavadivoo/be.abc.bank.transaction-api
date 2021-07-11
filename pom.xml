@@ -10,7 +10,7 @@
 	<name>transaction</name>
 	<description>transaction API is used to fetch the account related operations</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 		<basepackage>${project.groupId}</basepackage>
 		<open-api-generator-version>5.0.1</open-api-generator-version>
 		<swagger-annotations-version>1.5.8</swagger-annotations-version>
@@ -23,25 +23,16 @@
 		<scribejava-apis-version>6.9.0</scribejava-apis-version>
 	</properties>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.8.1</version>
 		</dependency>
-		<!-- dependencies are needed for the client being generated -->
-
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
 			<version>${swagger-annotations-version}</version>
 		</dependency>
-
-		<!-- You can find the dependencies for the library configuration you chose 
-			by looking in JavaClientCodegen. Then find the corresponding dependency on 
-			Maven Central, and set the versions in the property section below -->
-
-		<!-- HTTP client: jersey-client -->
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
@@ -97,7 +88,7 @@
 			<version>${jackson-databind-nullable-version}</version>
 		</dependency>
 
-		<!-- Joda time: if you use it -->
+		<!-- Joda time-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-joda</artifactId>
