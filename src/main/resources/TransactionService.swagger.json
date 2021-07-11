@@ -6,7 +6,7 @@
 		"title": "Bank Transaction Service API"
 	},
 	"host": "localhost:9083",
-	"basePath": "/transaction/v1",
+	"basePath": "abc/transactions/v1",
 	"schemes": [
 		"http"
 	],
