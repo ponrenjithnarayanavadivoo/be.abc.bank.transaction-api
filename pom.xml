@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.abc.bank.transaction</groupId>
 	<artifactId>transaction-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	<name>transaction</name>
 	<description>transaction API is used to fetch the account related operations</description>
