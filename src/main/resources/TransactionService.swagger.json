@@ -1,22 +1,22 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"description": "This service is used to manage the accounts of the ABC Bank customer",
+		"description": "This service is used to manage the transaction of the ABC Bank accounts",
 		"version": "1.0.0",
-		"title": "Bank Account Service API"
+		"title": "Bank Transaction Service API"
 	},
-	"host": "be.abc.transaction.service",
-	"basePath": "/transaction/v1",
+	"host": "localhost:9083",
+	"basePath": "abc/transactions/v1",
 	"schemes": [
 		"http"
 	],
 	"paths": {
-		"/create-transaction": {
+		"/createTransaction": {
 			"post": {
 				"tags": [
 					"createTransaction"
 				],
-				"description": "A new account will be created for the provided customer Id",
+				"description": "A new transaction will be created for the provided account Id",
 				"operationId": "createTransaction",
 				"consumes": [
 					"application/json"
@@ -26,7 +26,7 @@
 				],
 				"parameters": [
 					{
-						"$ref": "#/parameters/Api-Key"
+						"$ref": "#/parameters/Authorization"
 					},
 					{
 						"$ref": "#/parameters/Request-ID"
@@ -43,7 +43,7 @@
 					{
 						"in": "body",
 						"name": "TransactionRequestInfo",
-						"description": "customer information",
+						"description": "Transaction information",
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/TransactionRequestInfo"
@@ -63,20 +63,20 @@
 				}
 			}
 		},
-		"/transaction-detail/{accountIds}": {
+		"/getTransactionDetail/{accountIds}": {
 			"get": {
 				"tags": [
-					"accountDetail"
+					"geTransactionDetail"
 				],
-				"summary": "Find pet by ID",
-				"description": "Get the customer detail",
-				"operationId": "getAccountDetails",
+				"summary": "Find the transactions by account ID",
+				"description": "Get the transaction details",
+				"operationId": "getTransactionDetails",
 				"produces": [
 					"application/json"
 				],
 				"parameters": [
 					{
-						"$ref": "#/parameters/Api-Key"
+						"$ref": "#/parameters/Authorization"
 					},
 					{
 						"$ref": "#/parameters/Request-ID"
@@ -91,7 +91,7 @@
 						"$ref": "#/parameters/Client-TimeStamp"
 					},
 					{
-						"name": "accountId",
+						"name": "accountIds",
 						"in": "path",
 						"description": "customer account number",
 						"required": true,
@@ -109,11 +109,8 @@
 							"$ref": "#/definitions/TransactionDetailsInfo"
 						}
 					},
-					"404": {
-						"description": "Account Id not found"
-					},
 					"400": {
-						"description": "Invalid customer ID supplied"
+						"description": "Invalid input"
 					},
 					"500": {
 						"description": "Invalid Server Error"
@@ -123,10 +120,10 @@
 		}
 	},
 	"parameters": {
-		"Api-Key": {
-			"name": "Api-Key",
+		"Authorization": {
+			"name": "Authorization",
 			"in": "header",
-			"description": " ???",
+			"description": "for security",
 			"type": "string"
 		},
 		"Request-ID": {
