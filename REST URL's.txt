@@ -1,0 +1,8 @@
+#be.abc.bank.trransaction-api -For Transaction Services
+
+--------------------------------------------------------------------------------------------------
+Request | URL                                  | Description                 	                 
+--------------------------------------------------------------------------------------------------
+GET     | /getTransactionDetail/{customerId}   | Get the transaction details or the particular account                
+POST    | /createTransaction                   | create new transaction for the particular account                
+---------------------------------------------------------------------------------------------------
